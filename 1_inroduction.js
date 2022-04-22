@@ -31,3 +31,19 @@ const menu = {
 }
 
 console.log(menu)
+
+//Write an expression that outputs how to say hello in Portuguese:
+const greetings = {
+  hello: {
+    english: 'hi',
+    french: 'bonjour',
+    portuguese: 'oi'
+  },
+  goodbye: {
+    english: 'bye',
+    french: 'au revoir',
+    portuguese: 'tchau'
+  }
+};
+//solution
+console.log(greetings["hello"]["portuguese"]);
