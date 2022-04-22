@@ -253,6 +253,99 @@ We've modified objects quite a bit in this section, and even added new methods i
 
 
 
+## 3 Function VS Method
+At this point, we've mostly seen objects with properties that behave more like attributes. That is, properties such as color or type are data that describe an object, but they don't "do" anything. We can extend functionality to objects by adding methods to them.
+
+Say that we have a function, sayHello(), which simply logs a message to the console:
+```
+function sayHello () {
+  console.log('Hi there!');
+}
+```
+Now, say that we also have a developer object with a single property, name:
+```
+const developer = {
+  name: 'Andrew'
+};
+```
+If we want to add the sayHello() function into the developer object, we can add the same way as we add other new properties: by providing property name, then giving it a value. This time, the value of the property is a function!
+```
+developer.sayHello = function () {
+  console.log('Hi there!');
+};
+```
+This is how the updated developer object looks:
+```
+{
+  name: 'Andrew',
+  sayHello: function () {
+    console.log('Hi there!');
+  }
+}
+```
+So now that a sayHello property has been defined, how do we go about calling (i.e., invoking) its referenced function?
+
+### Calling Methods
+
+We can access a function in an object using the property name. Again, another name for a function property of an object is a method. We can access it the same way that we do with other properties: by using dot notation or square bracket notation. Let's take a look back at the updated developer object above, then invoke its sayHello() method:
+
+```
+const developer = {
+  name: 'Andrew',
+  sayHello: function () {
+    console.log('Hi there!');
+  }
+};
+```
+```
+developer.sayHello();
+// 'Hi there!'
+
+developer['sayHello']();
+// 'Hi there!'
+```
+ust like calling a function, an object's method is called by adding parentheses at the end of the method's name. Note that both dot notation and square bracket notation return the same result!
+
+### Passing Arguments Into Methods
+If the method takes arguments, you can proceed the same way, too:
+```
+const developer = {
+  name: 'Andrew',
+  sayHello: function () {
+    console.log('Hi there!');
+  },
+  favoriteLanguage: function (language) {
+    console.log(`My favorite programming language is ${language}`);
+  }
+};
+
+
+developer.favoriteLanguage('JavaScript');
+// My favorite programming language is JavaScript'
+```
+A method is a property of an object whose value is a function. Methods are called on objects in the following format: object.method().
+
+### 💡 Call Methods by Property Name 💡
+
+We've been using anonymous functions (i.e., functions without a name) for object methods. However, naming those functions is still valid JavaScript syntax. Consider the following object, greeter:
+```
+const greeter = {
+  greet: function sayHello() {
+    console.log('Hello!');
+  }
+};
+```
+Note that the greet property points to a function with a name: sayHello. Whether this function is named or not, greet is invoked the same way:
+
+```
+greeter.greet();
+
+// 'Hello!'
+```
+Named functions are great for a smoother debugging experience, since those functions will have a useful name to display in stack traces. They're completely optional, however, and you'll often read code written by developers who prefer one way or the other.
+
+### A  Method Can Access the Object it was Called On
+
 
 
 
