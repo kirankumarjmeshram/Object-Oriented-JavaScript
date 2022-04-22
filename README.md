@@ -11,11 +11,15 @@ Object-Oriented Programming in JavaScript
     const myObject = {};
  While elements in arrays are referenced by a numeric index, keys in an object must be named explicitly, like color or year. Check out the following example:
 
-~~~ const car = {
+ ``` 
+ const car = {
   color: 'red',
   year: 1992,
   isPreOwned: true
 }; 
+```
+
+
 
 Let's break this down and see what's going on:
 
