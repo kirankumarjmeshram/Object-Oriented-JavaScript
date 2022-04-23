@@ -397,4 +397,165 @@ Since an object is a collection of data and the means to operate on that data, a
 We've spent a bit of time on this inside objects, but did you know that the value of this can have different meanings outside an object? In the next section, we'll take a close look at globals, their relationship with this, and the implications of using the
 
 
+## 4 Beware of Globals
+### this and Function Invocation
 
+Let's compare the code from the chameleon object with the whoThis() code.
+```
+const chameleon = {
+  eyes: 2,
+  lookAround: function () {
+     console.log(`I see you with my ${this.eyes} eyes!`);
+  }
+};
+```
+```
+chameleon.lookAround();
+function whoThis () {
+  this.trickyish = true
+}
+
+whoThis();
+```
+### this in the Function/Method
+Before we dive into how this all works, take a look at the use of this inside both of these code snippets:
+```
+// from the chameleon code:
+console.log(`I see you with my ${this.eyes} eyes!`);
+
+// from the whoThis() code:
+this.trickyish = true  
+```
+There is some other code around them, but both of them have the format this.<some-identifier>. For our purposes of discovering the value of this, it does not matter that in the chameleon code, we're using this to retrieve a property, while in the whoThis() code, we're using this to set a property.
+
+So, in both of these cases, the use of this is virtually identical.
+
+### Compare the Structures of the Function/Method
+Now, I want you to pay attention to the differences in structure of how the two snippets of code are invoked. The lookAround() code is a method because it belongs to an object. Since it's a method, it's invoked as a property on the chameleon object:
+```
+chameleon.lookAround();
+```
+Now compare that with the whoThis() code. whoThis() is not a method; it's a plain, old, regular function. And look at how the whoThis() function is invoked:
+```
+whoThis();
+```
+Just like every normal function is invoked; it's just the name of the function and the parentheses (there's no object and no dot in front of it).
+
+### this and Invocation
+How the function is invoked determines the value of this inside the function. ← That sentence is really important, so read that two more times...we'll wait!
+
+Because .lookAround() is invoked as a method, the value of this inside of .lookAround() is whatever is left of the dot at invocation. Since the invocation looks like:
+```
+chameleon.lookAround();
+```
+The chameleon object is left of the dot. Therefore, inside the .lookAround() method, this will refer to the chameleon object!
+
+Now let's compare that with the whoThis() function. Since it is called as a regular function (i.e., not called as an method on an object), its invocation looks like:
+```
+whoThis();
+```
+Well, there is no dot. And there is no object left of the dot. So what is the value of this inside the whoThis() function? This is an interesting part of the JavaScript language.
+
+When a regular function is invoked, the value of this is the global window object.
+
+### The window Object
+If you haven't worked with the window object yet, this object is provided by the browser environment and is globally accessible to your JavaScript code using the identifier, window. This object is not part of the JavaScript specification (i.e., ECMAScript); instead, it is developed by the W3C.
+
+This window object has access to a ton of information about the page itself, including:
+
+- The page's URL (window.location;)
+- The vertical scroll position of the page (window.scrollY')
+- scrolling to a new location (window.scroll(0, window.scrollY + 200); to scroll 200 pixels down from the current location)
+- Opening a new web page (window.open("https://www.udacity.com/");)
+
+
+### Global Variables are Properties on window
+Since the window object is at the highest (i.e., global) level, an interesting thing happens with global variable declarations. Every variable declaration that is made at the global level (outside of a function) automatically becomes a property on the window object!
+
+Here we can see that the currentlyEating variable is set to 'ice cream'. Then, we immediately see that the window now has a currentlyEating property! Checking this property against the currentlyEating variable shows us that they are identical.
+```
+var currentlyEating = 'ice cream';
+
+window.currentlyEating === currentlyEating
+// true  bcz of var
+```
+
+### Globals and var, let, and const
+The keywords var, let, and const are used to declare variables in JavaScript. var has been around since the beginning of the language, while let and const are significantly newer additions (added in ES6).
+
+Only declaring variables with the var keyword will add them to the window object. If you declare a variable outside of a function with either let or const, it will not be added as a property to the window object.
+```
+let currentlyEating = 'ice cream';
+
+window.currentlyEating === currentlyEating 
+// false!
+```
+### Avoid Globals
+We've seen that declaring global variables and functions add them as properties to the window object. Globally-accessible code sounds like something that might be super helpful, right? I mean, wouldn't it be great if you could always be within arms reach of some ice cream (or is that just my lifelong dream)?
+
+Counterintuitively, though, global variables and functions are not ideal. There are actually a number of reasons why, but the two we'll look at are:
+
+- Tight coupling
+- Name collisions
+
+### Tight Coupling
+Tight coupling is a phrase that developers use to indicate code that is too dependent on the details of each other. The word "coupling" means the "pairing of two items together." In tight coupling, pieces of code are joined together in a way where changing one unintentionally alters the functioning of some other code:
+```
+var instructor = 'Richard';
+
+function richardSaysHi() {
+  console.log(`${instructor} says 'hi!'`);
+}
+```
+In the code above, note that the instructor variable is declared globally. The richardSaysHi() function does not have a local variable that it uses to store the instructor's name. Instead, it reaches out to the global variable and uses that. If we refactored this code by changing the variable from instructor to teacher, this would break the richardSaysHi() function (or we'd have to update it there, too!). This is a (simple) example of tightly-coupled code.
+
+### Name Collisions
+
+
+A name collision occurs when two (or more) functions depend on a variable with the same name. A major problem with this is that both functions will try to update the variable and or set the variable, but these changes are overridden by each other!
+
+Let's look at an example of name collision with this DOM manipulation code:
+```
+let counter = 1;
+
+function addDivToHeader () {
+  const newDiv = document.createElement('div');
+  newDiv.textContent = 'div number ' + counter;
+
+  counter = counter + 1;
+
+  const headerSection = document.querySelector('header');
+  headerSection.appendChild(newDiv)
+}
+
+function addDivToFooter() {
+  const newDiv = document.createElement('div');
+  newDiv.textContent = 'div number ' + counter;
+
+  counter = counter + 1;
+
+  const headerSection = document.querySelector('footer');
+  headerSection.appendChild(newDiv)
+}
+```
+In this code, we have an addDivToHeader() function and a addDivToFooter() function. Both of these functions create a <div> element and increment a counter variable.
+
+This code looks fine, but if you try running this code and adding a few <div>s to the <header> and <footer> elements, you'll find that the numbering will get off! Both addDivToHeader() and addDivToFooter() expect a global counter variable to be accessible to them -- not change out from under them!
+
+Since both functions increment the counter variable, if the code alternates between calling addDivToHeader() and addDivToFooter(), then their respective <div>s will not have numerically ascending numbers. For example, if we had the following calls:
+```
+addDivToHeader();
+addDivToHeader();
+
+addDivToFooter();
+
+addDivToHeader();
+```
+The developer probably wanted the <header> to have three <div> elements with the numbers 1, 2, and 3 and the <footer> element to have a single <div> with the number 1. However, what this code will produce is a <header> element with three <div> but with the numbers 1, 2, and 4 (not 3) and a <footer> element with the number 3...these are very different results. But it's happening because both functions depend on the counter variable and both update it.
+
+So what should you do instead? You should write as few global variables as possible. Write your variables inside of the functions that need them, keeping them as close to where they are needed as possible. Now, there are times when you'll need to write global variables, but you should only write them as a last resort.
+
+### Summary
+The window object is provided by the browser and is not part of the JavaScript language or specification. Any global variable declarations (i.e., those that use var) or global function declarations are added as properties to this window object. Excessive use of global variables is not a good practice, and can cause unexpected problems to accurately-written code.
+
+Whether you're working with the window object, or with an object you create yourself, recall that all objects are made up of key/value pairs. In the next section, we'll check out how to extract these individual keys or values!
