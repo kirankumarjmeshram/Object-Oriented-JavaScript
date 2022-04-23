@@ -607,3 +607,92 @@ The Object() constructor function has access to several methods to aid in develo
 
 ## LESSION 2
 # Function Runtime
+## 1 Introduction 
+Before we jump into the intro, take a quick glance at the following code:
+```
+function greet() {
+  console.log('Functions are cool!');
+}
+```
+### Functions are First-Class Functions
+In JavaScript, functions are first-class functions. This means that you can do with a function just about anything that you can do with other elements, such as numbers, strings, objects, arrays, etc. JavaScript functions can:
+
+1. Be stored in variables
+2. Be returned from a function.
+3. Be passed as arguments into another function.
+Note that while we can, say, treat a function as an object, a key difference between a function and an object is that functions can be called (i.e., invoked with ()), while regular objects cannot.
+
+In many ways, a function in JavaScript can be treated as a value. Returning it from a function, storing it in a variable, and even passing it in as an argument into another function is perfectly allowed!
+
+### Functions Can Return Functions
+Recall that a function must always return a value. Whether the value is explicitly specified in a return statement (e.g., returning a string, boolean, array, etc.), or the function implicitly returns undefined (e.g., a function that simply logs something to the console), a function will always return just one value.
+
+Since we know that functions are first-class functions, we can treat a function as a value and just as easily return a function from another function! A function that returns another function is known as higher-order function. Consider this example:
+```
+function alertThenReturn() {
+  alert('Message 1!');
+
+  return function () {
+    alert('Message 2!');
+  };
+}
+```
+If alertThenReturn() is invoked in a browser, we'll first see an alert message that says 'Message 1!', followed by the alertThenReturn() function returning an anonymous function. However, we don't actually see an alert that says 'Message 2!', since none of the code from the inner function is executed. How do we go about executing the returned function?
+
+Since alertThenReturn() returns that inner function, we can assign a variable to that return value:
+```
+const innerFunction = alertThenReturn();
+```
+We can then use the innerFunction variable like any other function!
+```
+innerFunction();
+
+// alerts 'Message 2!'
+```
+Likewise, this function can be invoked immediately without being stored in a variable. We'll still get the same outcome if we simply add another set of parentheses to the expression alertThenReturn();:
+```
+alertThenReturn()();
+
+// alerts 'Message 1!' then alerts 'Message 2!'
+```
+Notice the double set of parentheses (i.e. ()()) in that function call! The first pair of parentheses executes the alertThenReturn() function. The return value of this invocation is a function, which then gets invoked by the second pair of parentheses!
+
+### Summery 
+In the JavaScript language, functions are first-class functions. This means that we can do with functions just about everything that we can do with other elements in JavaScript, such as strings, arrays, or numbers. JavaScript functions can:
+
+Be stored in variables
+Be returned from a function.
+Be passed as arguments into another function.
+We've seen quite a few examples of the first two in the list, but what about passing a function as an argument into another function? Since this is such an important and common pattern in JavaScript, we'll take a deep dive in the next section!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
