@@ -1,0 +1,14 @@
+// Object.keys() and Object.values()
+const dictionary = {
+  car: 'automobile',
+  apple: 'healthy snack',
+  cat: 'cute furry animal',
+  dog: 'best friend'
+};
+let keys = Object.keys(dictionary);
+console.log(keys);
+// ['car', 'apple', 'cat', 'dog']
+
+let values = Object.values(dictionary);
+console.log(values)
+// ['automobile', 'healthy snack', 'cute furry animal', 'best friend']

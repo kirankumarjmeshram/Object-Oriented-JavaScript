@@ -559,3 +559,47 @@ So what should you do instead? You should write as few global variables as possi
 The window object is provided by the browser and is not part of the JavaScript language or specification. Any global variable declarations (i.e., those that use var) or global function declarations are added as properties to this window object. Excessive use of global variables is not a good practice, and can cause unexpected problems to accurately-written code.
 
 Whether you're working with the window object, or with an object you create yourself, recall that all objects are made up of key/value pairs. In the next section, we'll check out how to extract these individual keys or values!
+
+
+## 5 Extracting Properties and Values
+### Object Methods
+Do you remember earlier when we used the Object() constructor function to create (i.e., instantiate) new objects with the new keyword?
+```
+const myNewFancyObject = new Object();
+```
+The Object() function actually includes a few methods of its own to aid in the development of your applications. These methods are:
+
+Object.keys()
+Object.values()
+Whether you're building logic in your code, or just writing a utility "helper" function, feel free to use these methods as necessary. Let's see how each of these work!
+
+### Object.keys() and Object.values()
+At its core, an object is just a collection of key/value pairs. What if we want to extract only the keys from an object? Say we have this object representing a real-life dictionary:
+```
+const dictionary = {
+  car: 'automobile',
+  apple: 'healthy snack',
+  cat: 'cute furry animal',
+  dog: 'best friend'
+};
+```
+Having a collection of just the words (i.e., the dictionary object's keys) may be particularly useful. While we could use a for...in loop to iterate through an object and build our own list of keys, it can get a bit messy and verbose. Thankfully, JavaScript provides an abstraction just for this!
+
+When Object.keys() is given an object, it extracts just the keys of that object, then returns those keys in an array:
+```
+Object.keys(dictionary);
+
+// ['car', 'apple', 'cat', 'dog']
+```
+So Object.keys() gives returns an array of the provided object's property names. Likewise, if we want a list of the values of an object, we can use Object.values():
+```
+Object.values(dictionary);
+
+// ['automobile', 'healthy snack', 'cute furry animal', 'best friend']
+```
+
+Summary
+The Object() constructor function has access to several methods to aid in development. To extract property names and values from an object, we can use:
+
+- Object.keys() returns an array of a given object's own keys (property names).
+- Object.values() returns an array of a given object's own values (property values).
