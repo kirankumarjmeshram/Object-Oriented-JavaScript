@@ -346,10 +346,55 @@ Named functions are great for a smoother debugging experience, since those funct
 
 ### A  Method Can Access the Object it was Called On
 
+Recall that an object can contain data and the means to manipulate that data. But just how can an object reference its own properties, much less manipulate some of those properties itself? This is all possible with the this keyword!
 
 
+Let's make sure we're still on the same page! Write an expression that invokes the function referenced by the tree object's growOneFoot property:
+```
+const tree = {
+  type: 'redwood',
+  leaves: 'green',
+  height: 80,
+  age: 15,
+  growOneFoot: function () {
+    this.height += 1;
+  }
+};
+tree.growOneFoot()
+```
+```
+/*
 
+Create an object called `chameleon` with two properties:
 
+1. `color`, whose value is initially set to 'green' or 'pink'
+2. `changeColor`, a function which changes `chameleon`'s `color` to 'pink'
+    if it is 'green', or to 'green' if it is 'pink'
+
+*/
+
+const chameleon = {
+    color : "green",
+    changeColor  : function () {
+        if(this.color === "green"){
+              this.color = 'pink';
+        }else if(this.color === 'pink'){
+            this.color = "green";
+        }
+      
+    }
+}
+
+chameleon.changeColor ()
+console.log(chameleon.color)
+```
+
+### summery
+A method is a function property of an object. It is accessed the same way as any other property of the object (i.e., using dot notation or square bracket notation), and is invoked the same way as a regular function outside of an object (i.e., adding parentheses to the end of the expression).
+
+Since an object is a collection of data and the means to operate on that data, a method can access the object it was called on using the special this keyword. The value of this is determined when a method is invoked, and its value is the object on which the method was called. Since this is a reserved word in JavaScript, its value cannot be used as an identifier. Feel free to check out the links below for an additional look at methods and their relationship with this.
+
+We've spent a bit of time on this inside objects, but did you know that the value of this can have different meanings outside an object? In the next section, we'll take a close look at globals, their relationship with this, and the implications of using the
 
 
 
