@@ -4,7 +4,8 @@ Object-Oriented Programming in JavaScript
 # Created By Udacity
 
 
-
+## LESSION 1
+# Objects in Depth
 ## 1. Introduction
 ### Objects
  The object is one of the most important data structures in JavaScript. After all, you're currently taking an entire course on object-oriented programming!
@@ -603,3 +604,6 @@ The Object() constructor function has access to several methods to aid in develo
 
 - Object.keys() returns an array of a given object's own keys (property names).
 - Object.values() returns an array of a given object's own values (property values).
+
+## LESSION 2
+# Function Runtime
