@@ -1061,7 +1061,40 @@ When it comes to accessing variables, the JavaScript engine will traverse the sc
 
 In this section, we've seen quite a few examples of a nested function being able to access variables declared in its parent function's scope (i.e., in the scope in which that function was nested). These functions, combined with the lexical environment it which it was declared, actually have a very particular name: closure. Closures are very closely related to scope in JavaScript, and lead to some powerful and useful applications. We'll take a look at closures in detail next!
 
+## 5 Closures
 
+We just looked at how function scope works and how a scope chain is created. Just to recap: when an identifier (i.e., a variable) is used, the JavaScript engine will check the scope chain to retrieve the value for that identifier. The identifier might be found in the local scope (either in the function or block). If it's not found locally, then it might exist in an outer scope. It'll then keep checking the next outer scope followed by the next outer scope until it reaches the global scope (if necessary).
+Identifier lookup and the scope chain are really powerful tools for a function to access identifiers in the code. In fact, this lets you do something really interesting: create a function now, package it up with some variables, and save it to run later. If you have five buttons on the screen, you could write five different click handler functions, or you could use the same code five times with different saved values.
+
+Let's check out an example of a function retaining access to its scope. Consider the remember() function below:
+```
+function remember(number) {
+    return function() {
+        return number;
+    }
+}
+
+const returnedFunction = remember(5);
+
+console.log( returnedFunction() );
+// 5
+```
+When the Javascript engine enters remember(), it creates a new execution scope that points back to the prior execution scope. This new scope includes a reference to the number parameter (an immutable Number with the value 5). When the engine reaches the inner function (a function expression), it attaches a link to the current execution scope.
+
+This process of a function retaining access to its scope is called a closure. In this example, the inner function "closes over" number. A closure can capture any number of parameters and variables that it needs. MDN defines a closure as:
+When the Javascript engine enters remember(), it creates a new execution scope that points back to the prior execution scope. This new scope includes a reference to the number parameter (an immutable Number with the value 5). When the engine reaches the inner function (a function expression), it attaches a link to the current execution scope.
+
+This process of a function retaining access to its scope is called a closure. In this example, the inner function "closes over" number. A closure can capture any number of parameters and variables that it needs. MDN defines a closure as:
+**"the combination of a function and the lexical environment within which that function was declared."** ;
+This definition might not make a lot of sense if you don't know what the words "lexical environment" mean. The ES5 spec refers to a lexical environment as:
+
+**"the association of Identifiers to specific variables and functions based upon the lexical nesting structure of ECMAScript code."**
+
+In this case, the "lexical environment" refers the code as it was written in the JavaScript file. As such, a closure is:
+
+- The function itself, and
+- The code (but more importantly, the scope chain of) where the function is declared
+So looking back at the above example -- after remember(5) is executed and returned, how is the returned function still able to access number's value (i.e., 5)? In this section, we'll investigate how closures allow us to store a snapshot of state at the time the function object is created. 
 
 
 
