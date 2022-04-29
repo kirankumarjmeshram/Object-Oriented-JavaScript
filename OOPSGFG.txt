@@ -1,3 +1,5 @@
 
 
-Obhect : An Object is a real-world element in an object-oriented environment that may have physical or conceptual existence.
+Object : An Object is a real-world element in an object-oriented environment that may have physical or conceptual existence.
+Classes : A class can be defined as a blueprint or description of objects that can be created from it.
+
