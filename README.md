@@ -15,7 +15,7 @@ Object-Oriented Programming in JavaScript
     const myObject = {};
  While elements in arrays are referenced by a numeric index, keys in an object must be named explicitly, like color or year. Check out the following example:
 
- ``` 
+ ```js 
  const car = {
   color: 'red',
   year: 1992,
@@ -59,7 +59,7 @@ While both methods ultimately return an object without properties of its own, th
 Keep in mind that data within objects are mutable, meaning that data can be changed. There are a few exceptions to this, but for now, let's see how we can modify/reassign existing properties in an object.
 
 Consider the following cat object:
-```
+``` js
 const cat = {
   age: 2,
   name: 'Bailey',
@@ -72,7 +72,7 @@ const cat = {
 };
 ```
  Now, let's go ahead change it up a bit!
-```
+```js
 cat.age += 1;
 
 cat.age;
@@ -86,7 +86,7 @@ cat.name;
 ```
 After incrementing the value of the age property by 1, and reassigning name's value to 'Bambi', our cat object now looks like:
 
-```
+```js
 {
   age: 3,
   name: 'Bambi',
@@ -102,7 +102,7 @@ After incrementing the value of the age property by 1, and reassigning name's va
 ### Adding Properties
 Properties can be added to objects simply by specifying the property name, then giving it a value. Let's start off with a blank object, then add two properties:
 
-```
+```js
 const printer = {};
 
 printer.on = true;
@@ -110,19 +110,19 @@ printer.mode = 'black and white';
 ```
 The above example uses dot notation to add properties, but keep in mind that square bracket notation works just as well:
 
-```
+```js
 printer['remainingSheets'] = 168;
 ```
 Likewise, we can add a method to the printer object in a similar manner. This time, the value of the property is an anonymous (i.e., unnamed) function:
 
-```
+```js
 printer.print = function () {
   console.log('The printer is printing!');
 };
 ```
 Great! The complete printer object now looks like the following:
 
-```
+```js
 {
   on: true,
   mode: 'black and white',
@@ -139,14 +139,14 @@ Recall that since objects are mutable, not only can we modify existing propertie
 
 Say that the printer object above actually doesn't have any modes (i.e., 'black and white', 'color', etc.). We can go ahead and remove that property from printer using the delete operator.
 
-```
+```js
 delete printer.mode;
 
 // true
 ```
 Note that delete directly mutates the object at hand. If we try to access a deleted property, the JavaScript interpreter will no longer be able to find the mode property because the mode key (along with its value, true) have been deleted:
 
-```
+```js
 printer.mode;
 
 // undefined
@@ -156,7 +156,7 @@ printer.mode;
 
 On the other hand, objects in JavaScript are mutable. If you pass an object into a function, Javascript passes a reference to that object. Let's see what happens if we pass an object into a function and then modify a property:
 
-```
+```js
 let originalObject = {
   favoriteColor: 'red'
 };
@@ -178,7 +178,7 @@ What's more: the same rule applies when re-assigning an object to a new variable
 
 Consider this iceCreamOriginal object, which shows the amount of ice cream cones each instructor has eaten:
 
-```
+```js
 const iceCreamOriginal = {
   Andrew: 3,
   Richard: 15
@@ -186,7 +186,7 @@ const iceCreamOriginal = {
 ```
 Let's go ahead and make assign a new variable to iceCreamOriginal. We'll then check the value of its Richard property:
 
-```
+```js
 const iceCreamCopy = iceCreamOriginal;
 
 iceCreamCopy.Richard;
@@ -194,7 +194,7 @@ iceCreamCopy.Richard;
 ```
 As expected, the expression iceCreamCopy.Richard; returns 15 (i.e., it is the same value as the Richard property in iceCreamOriginal). Now, let's change the value in the copy, then check the results:
 
-```
+```js
 iceCreamCopy.Richard = 99;
 
 iceCreamCopy.Richard;
@@ -207,7 +207,7 @@ Since objects are passed by reference, making changes to the copy (iceCreamCopy)
 
 ### Comparing an Object with Another Object
 On the topic of references, let's see what happens when we compare one object with another object. The following objects, parrot and pigeon, have the same methods and properties
-```
+```js
 const parrot = {
   group: 'bird',
   feathers: true,
@@ -226,19 +226,19 @@ const pigeon = {
 ```
 Naturally, one might expect the parrot object and pigeon object to be equal. After all, both objects look exactly the same! Let's compare parrot and pigeon to find out:
 
-```
+```js
 parrot === pigeon;
 
 // false
 ```
 What's going on here? As it turns out, the expression will only return true when comparing two references to exactly the same object. Using what we now know about passing objects, let's confirm this. To start off, let's create a new variable, myBird, and assign it to one of the objects above:
 
-```
+```js
 const myBird = parrot;
 ```
 As we've just learned, myBird not only refers to the same object as parrot -- they are the same object! If we make any updates to myBird's properties, parrot's properties will be updated with exactly the same changes as well. Now, the comparison will return true:
 
-```
+```js
 myBird === parrot;
 
 // true
@@ -258,25 +258,25 @@ We've modified objects quite a bit in this section, and even added new methods i
 At this point, we've mostly seen objects with properties that behave more like attributes. That is, properties such as color or type are data that describe an object, but they don't "do" anything. We can extend functionality to objects by adding methods to them.
 
 Say that we have a function, sayHello(), which simply logs a message to the console:
-```
+```js
 function sayHello () {
   console.log('Hi there!');
 }
 ```
 Now, say that we also have a developer object with a single property, name:
-```
+```js
 const developer = {
   name: 'Andrew'
 };
 ```
 If we want to add the sayHello() function into the developer object, we can add the same way as we add other new properties: by providing property name, then giving it a value. This time, the value of the property is a function!
-```
+```js
 developer.sayHello = function () {
   console.log('Hi there!');
 };
 ```
 This is how the updated developer object looks:
-```
+```js
 {
   name: 'Andrew',
   sayHello: function () {
@@ -290,7 +290,7 @@ So now that a sayHello property has been defined, how do we go about calling (i.
 
 We can access a function in an object using the property name. Again, another name for a function property of an object is a method. We can access it the same way that we do with other properties: by using dot notation or square bracket notation. Let's take a look back at the updated developer object above, then invoke its sayHello() method:
 
-```
+```js
 const developer = {
   name: 'Andrew',
   sayHello: function () {
@@ -298,7 +298,7 @@ const developer = {
   }
 };
 ```
-```
+```js
 developer.sayHello();
 // 'Hi there!'
 
@@ -309,7 +309,7 @@ ust like calling a function, an object's method is called by adding parentheses 
 
 ### Passing Arguments Into Methods
 If the method takes arguments, you can proceed the same way, too:
-```
+```js
 const developer = {
   name: 'Andrew',
   sayHello: function () {
@@ -329,7 +329,7 @@ A method is a property of an object whose value is a function. Methods are calle
 ### 💡 Call Methods by Property Name 💡
 
 We've been using anonymous functions (i.e., functions without a name) for object methods. However, naming those functions is still valid JavaScript syntax. Consider the following object, greeter:
-```
+```js
 const greeter = {
   greet: function sayHello() {
     console.log('Hello!');
@@ -338,7 +338,7 @@ const greeter = {
 ```
 Note that the greet property points to a function with a name: sayHello. Whether this function is named or not, greet is invoked the same way:
 
-```
+```js
 greeter.greet();
 
 // 'Hello!'
@@ -351,7 +351,7 @@ Recall that an object can contain data and the means to manipulate that data. Bu
 
 
 Let's make sure we're still on the same page! Write an expression that invokes the function referenced by the tree object's growOneFoot property:
-```
+```js
 const tree = {
   type: 'redwood',
   leaves: 'green',
@@ -363,7 +363,7 @@ const tree = {
 };
 tree.growOneFoot()
 ```
-```
+```js
 /*
 
 Create an object called `chameleon` with two properties:
@@ -402,7 +402,7 @@ We've spent a bit of time on this inside objects, but did you know that the valu
 ### this and Function Invocation
 
 Let's compare the code from the chameleon object with the whoThis() code.
-```
+```js
 const chameleon = {
   eyes: 2,
   lookAround: function () {
@@ -410,7 +410,7 @@ const chameleon = {
   }
 };
 ```
-```
+```js
 chameleon.lookAround();
 function whoThis () {
   this.trickyish = true
@@ -420,7 +420,7 @@ whoThis();
 ```
 ### this in the Function/Method
 Before we dive into how this all works, take a look at the use of this inside both of these code snippets:
-```
+```js
 // from the chameleon code:
 console.log(`I see you with my ${this.eyes} eyes!`);
 
@@ -433,11 +433,11 @@ So, in both of these cases, the use of this is virtually identical.
 
 ### Compare the Structures of the Function/Method
 Now, I want you to pay attention to the differences in structure of how the two snippets of code are invoked. The lookAround() code is a method because it belongs to an object. Since it's a method, it's invoked as a property on the chameleon object:
-```
+```js
 chameleon.lookAround();
 ```
 Now compare that with the whoThis() code. whoThis() is not a method; it's a plain, old, regular function. And look at how the whoThis() function is invoked:
-```
+```js
 whoThis();
 ```
 Just like every normal function is invoked; it's just the name of the function and the parentheses (there's no object and no dot in front of it).
@@ -446,13 +446,13 @@ Just like every normal function is invoked; it's just the name of the function a
 How the function is invoked determines the value of this inside the function. ← That sentence is really important, so read that two more times...we'll wait!
 
 Because .lookAround() is invoked as a method, the value of this inside of .lookAround() is whatever is left of the dot at invocation. Since the invocation looks like:
-```
+```js
 chameleon.lookAround();
 ```
 The chameleon object is left of the dot. Therefore, inside the .lookAround() method, this will refer to the chameleon object!
 
 Now let's compare that with the whoThis() function. Since it is called as a regular function (i.e., not called as an method on an object), its invocation looks like:
-```
+```js
 whoThis();
 ```
 Well, there is no dot. And there is no object left of the dot. So what is the value of this inside the whoThis() function? This is an interesting part of the JavaScript language.
@@ -485,7 +485,7 @@ window.currentlyEating === currentlyEating
 The keywords var, let, and const are used to declare variables in JavaScript. var has been around since the beginning of the language, while let and const are significantly newer additions (added in ES6).
 
 Only declaring variables with the var keyword will add them to the window object. If you declare a variable outside of a function with either let or const, it will not be added as a property to the window object.
-```
+```js
 let currentlyEating = 'ice cream';
 
 window.currentlyEating === currentlyEating 
@@ -501,7 +501,7 @@ Counterintuitively, though, global variables and functions are not ideal. There 
 
 ### Tight Coupling
 Tight coupling is a phrase that developers use to indicate code that is too dependent on the details of each other. The word "coupling" means the "pairing of two items together." In tight coupling, pieces of code are joined together in a way where changing one unintentionally alters the functioning of some other code:
-```
+```js
 var instructor = 'Richard';
 
 function richardSaysHi() {
@@ -516,7 +516,7 @@ In the code above, note that the instructor variable is declared globally. The r
 A name collision occurs when two (or more) functions depend on a variable with the same name. A major problem with this is that both functions will try to update the variable and or set the variable, but these changes are overridden by each other!
 
 Let's look at an example of name collision with this DOM manipulation code:
-```
+```js
 let counter = 1;
 
 function addDivToHeader () {
@@ -544,7 +544,7 @@ In this code, we have an addDivToHeader() function and a addDivToFooter() functi
 This code looks fine, but if you try running this code and adding a few <div>s to the <header> and <footer> elements, you'll find that the numbering will get off! Both addDivToHeader() and addDivToFooter() expect a global counter variable to be accessible to them -- not change out from under them!
 
 Since both functions increment the counter variable, if the code alternates between calling addDivToHeader() and addDivToFooter(), then their respective <div>s will not have numerically ascending numbers. For example, if we had the following calls:
-```
+```js
 addDivToHeader();
 addDivToHeader();
 
@@ -565,7 +565,7 @@ Whether you're working with the window object, or with an object you create your
 ## 5 Extracting Properties and Values
 ### Object Methods
 Do you remember earlier when we used the Object() constructor function to create (i.e., instantiate) new objects with the new keyword?
-```
+```js
 const myNewFancyObject = new Object();
 ```
 The Object() function actually includes a few methods of its own to aid in the development of your applications. These methods are:
@@ -576,7 +576,7 @@ Whether you're building logic in your code, or just writing a utility "helper" f
 
 ### Object.keys() and Object.values()
 At its core, an object is just a collection of key/value pairs. What if we want to extract only the keys from an object? Say we have this object representing a real-life dictionary:
-```
+```js
 const dictionary = {
   car: 'automobile',
   apple: 'healthy snack',
@@ -587,13 +587,13 @@ const dictionary = {
 Having a collection of just the words (i.e., the dictionary object's keys) may be particularly useful. While we could use a for...in loop to iterate through an object and build our own list of keys, it can get a bit messy and verbose. Thankfully, JavaScript provides an abstraction just for this!
 
 When Object.keys() is given an object, it extracts just the keys of that object, then returns those keys in an array:
-```
+```js
 Object.keys(dictionary);
 
 // ['car', 'apple', 'cat', 'dog']
 ```
 So Object.keys() gives returns an array of the provided object's property names. Likewise, if we want a list of the values of an object, we can use Object.values():
-```
+```js
 Object.values(dictionary);
 
 // ['automobile', 'healthy snack', 'cute furry animal', 'best friend']
@@ -609,7 +609,7 @@ The Object() constructor function has access to several methods to aid in develo
 # Function Runtime
 ## 1 Introduction 
 Before we jump into the intro, take a quick glance at the following code:
-```
+```js
 function greet() {
   console.log('Functions are cool!');
 }
@@ -628,7 +628,7 @@ In many ways, a function in JavaScript can be treated as a value. Returning it f
 Recall that a function must always return a value. Whether the value is explicitly specified in a return statement (e.g., returning a string, boolean, array, etc.), or the function implicitly returns undefined (e.g., a function that simply logs something to the console), a function will always return just one value.
 
 Since we know that functions are first-class functions, we can treat a function as a value and just as easily return a function from another function! A function that returns another function is known as higher-order function. Consider this example:
-```
+```js
 function alertThenReturn() {
   alert('Message 1!');
 
@@ -640,11 +640,11 @@ function alertThenReturn() {
 If alertThenReturn() is invoked in a browser, we'll first see an alert message that says 'Message 1!', followed by the alertThenReturn() function returning an anonymous function. However, we don't actually see an alert that says 'Message 2!', since none of the code from the inner function is executed. How do we go about executing the returned function?
 
 Since alertThenReturn() returns that inner function, we can assign a variable to that return value:
-```
+```js
 const innerFunction = alertThenReturn();
 ```
 We can then use the innerFunction variable like any other function!
-```
+```js
 innerFunction();
 
 // alerts 'Message 2!'
@@ -671,7 +671,7 @@ Recall that JavaScript functions are first-class functions. We can do with funct
 
 We'll be focusing on callbacks in this section. Callback functions are great because they can delegate calling functions to other functions. They allow you to build your applications with composition, leading to cleaner and more efficient code.
 
-```
+```js
 function callAndAdd(n, callbackFunction) {
   return n + callbackFunction();
 }
@@ -699,7 +699,7 @@ Let's check out a couple in detail:
 
 ### forEach()
 Array's forEach() method takes in a callback function and invokes that function for each element in the array. In other words, forEach() allows you to iterate (i.e., loop) through an array, similar to using a for loop. Check out its signature:
-```
+```js
 array.forEach(function callback(currentValue, index, array) {
     // function code here
 });
@@ -707,7 +707,7 @@ array.forEach(function callback(currentValue, index, array) {
 The callback function itself receives the arguments: the current array element, its index, and the entire array itself.
 
 Let's say we have a simple function, logIfOdd(), that takes in a single number and logs it to the console if that number is an odd number:
-```
+```js
 function logIfOdd(n) {
   if (n % 2 !== 0) {
     console.log(n);
@@ -722,7 +722,7 @@ logIfOdd(3);
 ```
 We can iterate through the above array with forEach() and simply pass it the logIfOdd() function!
 
-```
+```js
 [1, 5, 2, 4, 6, 3].forEach(function logIfOdd(n) {
   if (n % 2 !== 0) {
     console.log(n);
@@ -734,7 +734,7 @@ We can iterate through the above array with forEach() and simply pass it the log
 // 3
 ```
 Keep in mind that it's quite common to pass an anonymous function as an argument in forEach() as well:
-```
+```js
 [1, 5, 2, 4, 6, 3].forEach(function (n) {
   if (n % 2 !== 0) {
     console.log(n);
@@ -746,7 +746,7 @@ Keep in mind that it's quite common to pass an anonymous function as an argument
 // 3
 ```
 Alternatively, it's possible to simply pass in just the name of the function as well (i.e., assuming the function was already defined, of course).
-```
+```js
 [1, 5, 2, 4, 6, 3].forEach(logIfOdd);
 
 // 1
@@ -757,7 +757,7 @@ Alternatively, it's possible to simply pass in just the name of the function as 
 ### map()
 Array's map() method is similar to **forEach() in that it invokes a callback function for each element in an array** . However, **map() returns a new array based on what's returned from the callback function**. Check out the following:
 
-```
+```js
 const names = ['David', 'Richard', 'Veronika'];
 
 const nameLengths = names.map(function(name) {
@@ -769,7 +769,7 @@ Let's go over what's happening here. The map() method works on arrays, so we hav
 const names = ['David', 'Richard', 'Veronika'];
 ```
 We call map() on the names array and pass it an anonymous function as an argument:
-```
+```js
 names.map(function(name) {
   return name.length;
 });
@@ -787,7 +787,7 @@ So nameLengths will be a new array: [5, 7, 8]. Again, it is important to underst
 
 
 
-```
+```js
 /* Using map()
  *
  * Using the musicData array and map():
@@ -843,7 +843,7 @@ Array's filter() method is similar to the map() method:
 - It returns a new array
 The difference is that the function passed to filter() is used as a test, and only items in the array that pass the test are included in the new array. Consider the following example:
 
-```
+```js
 const names = ['David', 'Richard', 'Veronika'];
 
 const shortNames = names.filter(function(name) {
@@ -853,7 +853,7 @@ const shortNames = names.filter(function(name) {
 console.log(shortNames);
 // ['David']
 ```
-```
+```js
 /* Using filter()
  
   Using the musicData array and filter():
@@ -924,7 +924,7 @@ Check out the following image that highlights a function's scope, then we'll tak
 
 The nested child() function has access to all a, b, and c variables. That is, these variables are in the child() function's scope.
 
-```
+```js
 const myName = 'Andrew';
 
 function introduceMyself() {
@@ -949,7 +949,7 @@ You may be wondering why scope is so heavily associated with functions in JavaSc
 
 This is all because variables in JavaScript are traditionally defined in the scope of a function, rather than in the scope of a block. Since entering a function will change scope, any variables defined inside that function are not available outside of that function. On the other hand, if there are any variables defined inside a block (e.g., within an if statement), those variables are available outside of that block.
 
-```
+```js
 var globalNumber = 5;
 
 function globalIncrementer() {
@@ -962,7 +962,7 @@ function globalIncrementer() {
 In the example above, globalNumber is outside the function; it is a global variable that the globalIncrementer() function has access to. globalIncrementer() simply has a local variable (localNumber) declared within it, then increments globalNumber by 1 before returning the updated value of globalNumber itself.
 
 After calling the function a few times, we see that the value of globalNumber has indeed increased each time:
-```
+```js
 console.log(globalIncrementer());
 // 6
 
@@ -987,7 +987,7 @@ ES6 syntax allows for additional scope while declaring variables with the **let 
 
 ### Scope Chain
 Whenever your code attempts to access a variable during a function call, the JavaScript interpreter will always start off by looking within its own local variables. If the variable isn't found, the search will continue looking up what is called the scope chain. Let's take a look at an example:
-```
+```js
 function one() {
   two();
   function two() {
@@ -1017,7 +1017,7 @@ Recall that when JavaScript applications run inside a host environment (e.g., a 
 What happens when you create a variable with the same name as another variable somewhere in the scope chain?
 
 J**avaScript won't throw an error or otherwise prevent you from creating that extra variable. In fact, the variable with local scope will just temporarily "shadow" the variable in the outer scope. This is called variable shadowing**. Consider the following example:
-```
+```js
 let symbol = '¥';
 
 function displayPrice(price) {
@@ -1037,7 +1037,7 @@ After invoking displayPrice() and passing it an argument of '80', the function o
 How does the JavaScript interpreter know which value of symbol to use? Well, since the variable pointing to '$' is declared inside a function (i.e., the "inner" scope), it will override any variables of the same name that belong in an outer scope -- such as the global variable pointing to '¥'. As a result, '$80' is displayed rather than '¥80'.
 
 All in all, if there are any naming overlaps between variables in different contexts, they are all resolved by moving through the scope chain from inner to outer scopes (i.e., local all the way to global). This way, any local variables that have the same name take precedence over those with a wider scope.
-```
+```js
 let n = 2;
 
 function myFunction() {
@@ -1067,7 +1067,7 @@ We just looked at how function scope works and how a scope chain is created. Jus
 Identifier lookup and the scope chain are really powerful tools for a function to access identifiers in the code. In fact, this lets you do something really interesting: create a function now, package it up with some variables, and save it to run later. If you have five buttons on the screen, you could write five different click handler functions, or you could use the same code five times with different saved values.
 
 Let's check out an example of a function retaining access to its scope. Consider the remember() function below:
-```
+```js
 function remember(number) {
     return function() {
         return number;
@@ -1097,7 +1097,7 @@ In this case, the "lexical environment" refers the code as it was written in the
 So looking back at the above example -- after remember(5) is executed and returned, how is the returned function still able to access number's value (i.e., 5)? In this section, we'll investigate how closures allow us to store a snapshot of state at the time the function object is created. 
 **Closure is a combination of function and its lexical environment**
 
-```
+```js
 function myCounter() {
   let count = 0;
 
@@ -1127,7 +1127,7 @@ To recap, we've seen two common and powerful applications of closures:
 1. Passing arguments implicitly.
 2. At function declaration, storing a snapshot of scope.
 
-```
+```js
 /*
 
 Declare a function named `expandArray()` that:
@@ -1160,7 +1160,7 @@ JavaScript manages memory with automatic garbage collection. This means that whe
 Let's look at garbage collection in the context of closures. We know that the variables of a parent function are accessible to the nested, inner function. If the nested function captures and uses its parent's variables (or variables along the scope chain, such as its parent's parent's variables), those variables will stay in memory as long as the functions that utilize them can still be referenced.
 
 As such, referenceable variables in JavaScript are not garbage collected! Let's quickly look back at the myCounter function :
-```
+```javascript
 function myCounter() {
   let count = 0;
 
@@ -1182,13 +1182,13 @@ At this point, we've worked a lot with functions declarations and function expre
 
 ### Function Declarations vs. Function Expressions
 A **function declaration** defines a function and does not require a variable to be assigned to it. It simply declares a function, and doesn't itself return a value. Here's an example:
-```
+```js
 function returnHello() {
   return 'Hello!';
 }
 ```
 a **function expression** does return a value. Function expressions can be anonymous or named, and are part of another expression's syntax. They're commonly assigned to variables, as well. Here's the same function as a function expression:
-```
+```js
 // anonymous
 const myFunction = function () {
   return 'Hello!';
@@ -1204,7 +1204,7 @@ const myFunction = function returnHello() {
 
 mmediately-Invoked Function Expressions: Structure and Syntax
 An immediately-invoked function expression, or IIFE (pronounced iffy), is a function that is called immediately after it is defined. Check out the following example:
-```
+```js
 (function sayHi(){
     alert('Hi there!');
   }
@@ -1218,7 +1218,8 @@ The syntax might seem a bit odd, but all we're doing is wrapping a function in p
 
 Let's look into how we can go about passing arguments into IIFE's. Consider the following example of an anonymous function expression that takes in a single argument:
 
-```(function (name){
+```js
+ (function (name){
     alert(`Hi, ${name}`);
   }
 )('Andrew');
@@ -1229,7 +1230,7 @@ Let's look into how we can go about passing arguments into IIFE's. Consider the 
 The second pair of parentheses not only immediately executes the function preceding it -- it's also the place to put any arguments that the function may need! We pass in the string 'Andrew', which is stored in the function expression's name variable. It is then immediately invoked, alerting the message 'Hi, Andrew' onto the screen.
 
 Here's another example of an IIFE, this time taking two arguments and returning their product:
-```
+```js
 (function (x, y){
     console.log(x * y);
   }
@@ -1241,7 +1242,7 @@ Again -- the arguments passed into the anonymous function (i.e., 2 and 3) belong
 
 ### IIFE's and Private Scope
 One of the primary uses for IIFE's is to create private scope (i.e., private state). Recall that variables in JavaScript are traditionally scoped to a function. Knowing this, we can leverage the behavior of closures to protect variables or methods from being accessed! Consider the following example of a simple closure within an IIFE, referenced by myFunction:
-```
+```js
 const myFunction = (
   function () {
     const hi = 'Hi!';
@@ -1311,7 +1312,7 @@ button.addEventListener('click', (function() {
   };
 })());
 ```
-
+Quite a bit is going on in the IIFE, so let's break it down!
 
 
 
