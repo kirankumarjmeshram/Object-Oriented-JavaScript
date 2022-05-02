@@ -11,8 +11,9 @@ Object-Oriented Programming in JavaScript
  The object is one of the most important data structures in JavaScript. After all, you're currently taking an entire course on object-oriented programming!
 
  Fundamentally, an object is a collection of associated key/value pairs. We create an object with curly brackets (i.e., { and }). Here's a variable called myObject, which is assigned to an empty object:
-    
+ ```js   
     const myObject = {};
+  ```
  While elements in arrays are referenced by a numeric index, keys in an object must be named explicitly, like color or year. Check out the following example:
 
  ```js 
