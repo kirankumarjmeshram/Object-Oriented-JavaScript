@@ -1315,8 +1315,33 @@ button.addEventListener('click', (function() {
 ```
 Quite a bit is going on in the IIFE, so let's break it down!
 
+First, we declare a local variable, count, which is initially set to 0. We then return a function from that function. The returned function increments count, but alerts the user and resets the count back to 0 if the count reaches 2.
 
+What is important to note is that the returned function closes over the count variable. That is, because a function maintains a reference to its parent's scope, count is available for the returned function to use! As a result, we immediately invoke a function that returns that function. And since the returned function has access to the internal variable, count, a private scope is created -- effectively protecting the data!
 
+Containing count in a closure allows us to retain the data from each click. Now, let's see this all in action!
+
+```js
+(function(n){
+    delete n;
+    return n;
+  })(2);
+  
+  //2
+```
+The delete operator is actually only effective on an object's properties; it isn't used to directly 
+deallocate resources (i.e., free up memory), and has no effect on variables or names of functions.
+As such, the number passed into this immediately-invoked function expression, 2, is returned.
+
+### Benefits of Immediately-Invoked Function Expressions
+We've seen how using an immediately-invoked function expression creates a private scope that protects variables or methods from being accessed. IIFE's ultimately use the returned functions to access private data within the closure. This works out very well: while these returned functions are publicly-accessible, they still maintain privacy for the variables defined within them!
+
+Another great opportunity to use an IFFE is when you want to execute some code without creating extra global variables. However, note that an IIFE is only intended to be invoked once, to create a unique execution context. If you have some code that is expected to be re-used (e.g., a function meant to be executed more than once in the application), declaring the function and then invoking it might be a better option.
+
+All in all, if you simply have a one-time task (e.g., initializing an application), an IIFE is a great way to get something done without polluting your the global environment with extra variables. Cleaning up the global namespace decreases the chance of collisions with duplicate variable names, after all.
+
+### Summary
+An immediately-invoked function expression (IIFE) is a function that is called immediately after it is defined. Utilizing an IIFE alongside closures allows for a private scope, which maintains privacy for variables defined within them. And since less variables are created, an IIFE will help to minimize pollution of the global environment, hindering the chances of variable name collisions.
 
 
 
