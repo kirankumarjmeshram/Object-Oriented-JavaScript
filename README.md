@@ -1095,26 +1095,222 @@ In this case, the "lexical environment" refers the code as it was written in the
 - The function itself, and
 - The code (but more importantly, the scope chain of) where the function is declared
 So looking back at the above example -- after remember(5) is executed and returned, how is the returned function still able to access number's value (i.e., 5)? In this section, we'll investigate how closures allow us to store a snapshot of state at the time the function object is created. 
+**Closure is a combination of function and its lexical environment**
 
+```
+function myCounter() {
+  let count = 0;
 
+  return function () {
+    count += 1;
+    return count;
+  };
+}
 
+let counter = myCounter();
 
+counter();
+// 1
 
+counter();
+// 2
 
+counter.count;
+// undefined
 
+count;
+// undefined
+```
+### Applications of Closures
+To recap, we've seen two common and powerful applications of closures:
 
+1. Passing arguments implicitly.
+2. At function declaration, storing a snapshot of scope.
 
+```
+/*
 
+Declare a function named `expandArray()` that:
 
+* Takes no arguments
+* Contains a single local variable, `myArray`, which points to [1, 1, 1]
+* Returns an anonymous function that directly modifies `myArray` by
+  appending another `1` into it
+* The returned function then returns the value of `myArray`
 
+*/
+function expandArray(){
+   let myArray = [1, 1, 1];
+  
+  return function (){
+      myArray.push(1);
+  
+      return myArray
+  }
+  
+}
 
+let abc = expandArray();
+console.log(abc()) //[1,1,1,1]
+```
 
+### Garbage Collection
+JavaScript manages memory with automatic garbage collection. This means that when data is no longer referable (i.e., there are no remaining references to that data available for executable code), it is "garbage collected" and will be destroyed at some later point in time. This frees up the resources (i.e., computer memory) that the data had once consumed, making those resources available for re-use.
 
+Let's look at garbage collection in the context of closures. We know that the variables of a parent function are accessible to the nested, inner function. If the nested function captures and uses its parent's variables (or variables along the scope chain, such as its parent's parent's variables), those variables will stay in memory as long as the functions that utilize them can still be referenced.
 
+As such, referenceable variables in JavaScript are not garbage collected! Let's quickly look back at the myCounter function :
+```
+function myCounter() {
+  let count = 0;
 
+  return function () {
+    count += 1;
+    return count;
+  };
+}
+```
 
+The existence of the nested function keeps the count variable from being available for garbage collection, therefore count remains available for future access. After all, a given function (and its scope) does not end when the function is returned. Remember that functions in JavaScript retain access to the scope that they were created in!
 
+### Summeryy 
+A closure refers to the combination of a function and the lexical environment in which that function was declared. Every time a function is defined, closure is created for that function. This is especially powerful in situations where a function is defined within another function, allowing the nested function to access variables outside of it. Functions also keep a link to its parent's scope even if the parent has returned. This prevents data in its parents from being garbage collected.
 
+At this point, we've worked a lot with functions declarations and function expressions. Did you know that you can write functions that can be immediately invoked after they're defined? We'll check out these immediately-invoked function expressions (IIFE's, or iiffy's) in the next section!
+
+## 6 Immediately Invoked Function Expression (IIFE)
+
+### Function Declarations vs. Function Expressions
+A **function declaration** defines a function and does not require a variable to be assigned to it. It simply declares a function, and doesn't itself return a value. Here's an example:
+```
+function returnHello() {
+  return 'Hello!';
+}
+```
+a **function expression** does return a value. Function expressions can be anonymous or named, and are part of another expression's syntax. They're commonly assigned to variables, as well. Here's the same function as a function expression:
+```
+// anonymous
+const myFunction = function () {
+  return 'Hello!';
+};
+
+// named
+const myFunction = function returnHello() {
+  return 'Hello!';
+};
+
+```
+### Immediately-Invoked Function Expressions: Structure and Syntax
+
+mmediately-Invoked Function Expressions: Structure and Syntax
+An immediately-invoked function expression, or IIFE (pronounced iffy), is a function that is called immediately after it is defined. Check out the following example:
+```
+(function sayHi(){
+    alert('Hi there!');
+  }
+)();
+
+// alerts 'Hi there!'
+```
+The syntax might seem a bit odd, but all we're doing is wrapping a function in parentheses, then adding a pair of parentheses at the end of that to invoke it!
+
+### Passing Arguments into IIFE's
+
+Let's look into how we can go about passing arguments into IIFE's. Consider the following example of an anonymous function expression that takes in a single argument:
+
+```(function (name){
+    alert(`Hi, ${name}`);
+  }
+)('Andrew');
+
+// alerts 'Hi, Andrew'
+```
+
+The second pair of parentheses not only immediately executes the function preceding it -- it's also the place to put any arguments that the function may need! We pass in the string 'Andrew', which is stored in the function expression's name variable. It is then immediately invoked, alerting the message 'Hi, Andrew' onto the screen.
+
+Here's another example of an IIFE, this time taking two arguments and returning their product:
+```
+(function (x, y){
+    console.log(x * y);
+  }
+)(2, 3);
+
+// 6
+```
+Again -- the arguments passed into the anonymous function (i.e., 2 and 3) belong in trailing set of parentheses.
+
+### IIFE's and Private Scope
+One of the primary uses for IIFE's is to create private scope (i.e., private state). Recall that variables in JavaScript are traditionally scoped to a function. Knowing this, we can leverage the behavior of closures to protect variables or methods from being accessed! Consider the following example of a simple closure within an IIFE, referenced by myFunction:
+```
+const myFunction = (
+  function () {
+    const hi = 'Hi!';
+    return function () {
+      console.log(hi);
+    }
+  }
+)();
+```
+Let's break myFunction down and review the individual parts that make it up:
+
+![](https://video.udacity-data.com/topher/2017/December/5a31c70b_l2-67-iife-with-a-closure/l2-67-iife-with-a-closure.png)
+
+myFunction refers to an IIFE with a locally-defined variable, hi, and a returned function that closes over hi and prints its value to the console.
+
+In the above image, an immediately-invoked function expression is used to immediately run a function. This function runs and returns an anonymous function that is stored in the myFunction variable.
+
+Note that the function that is being returned closes over (i.e., captures) the hi variable. This allows myFunction to maintain a private, mutable state that cannot be accessed outside the function! What's more: because the function expressed is called immediately, the IIFE wraps up the code nicely so that we don't pollute the global scope.
+
+If any of this sounds familiar -- it's because IIFE's are very closely related to everything you've learned about scope and closures!
+
+### IIFE's, Private Scope, and Event Handling
+Let's check out another example of an immediately-invoked function expression -- this time in the context of handling an event. Say that we want to create a button on a page that alerts the user on every other click. One way to begin doing this would be to keep track of the number of times that the button was clicked. But how should we maintain this data?
+
+We could keep track of the count with a variable that we declare in the global scope (this would make sense if other parts of the application need access to the count data). However, an even better approach would be to enclose this data in event handler itself!
+
+For one, this approach prevents us from polluting the global with extra variables (and potentially variable name collisions). What's more: if we use an IIFE, we can leverage a closure to protect the count variable from being accessed externally! This prevents any accidental mutations or unwanted side-effects from inadvertently altering the count.
+
+To begin, let's first create an HTML file containing a single button:
+```html
+<!-- button.html -->
+
+<html>
+
+  <body>
+
+     <button id='button'>Click me!</button>
+
+     <script src='button.js'></script>
+
+  </body>
+
+</html>
+```
+No surprises here -- just a <button> tag with ID of 'button'. We also reference a button.js file that we're now going to build. Within that file, let's retrieve a reference to that element via its ID, then save that reference to a variable, button:
+
+```js
+// button.js
+
+const button = document.getElementById('button');
+```
+Next, we'll add an event listener to button, and listen for a 'click' event. Then, we'll pass in an IIFE as the second argument:
+
+```js
+// button.js
+
+button.addEventListener('click', (function() {
+  let count = 0;
+
+  return function() {
+    count += 1;
+
+    if (count === 2) {
+      alert('This alert appears every other press!');
+      count = 0;
+    }
+  };
+})());
+```
 
 
 
