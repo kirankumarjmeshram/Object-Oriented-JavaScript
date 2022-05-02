@@ -1334,7 +1334,7 @@ deallocate resources (i.e., free up memory), and has no effect on variables or n
 As such, the number passed into this immediately-invoked function expression, 2, is returned.
 
 ### Benefits of Immediately-Invoked Function Expressions
-We've seen how using an immediately-invoked function expression creates a private scope that protects variables or methods from being accessed. IIFE's ultimately use the returned functions to access private data within the closure. This works out very well: while these returned functions are publicly-accessible, they still maintain privacy for the variables defined within them!
+We've seen how using an **immediately-invoked function expression creates a private scope that protects variables or methods from being accessed**. IIFE's ultimately use the returned functions to access private data within the closure. This works out very well: while these returned functions are publicly-accessible, they still maintain privacy for the variables defined within them!
 
 Another great opportunity to use an IFFE is when you want to execute some code without creating extra global variables. However, note that an IIFE is only intended to be invoked once, to create a unique execution context. If you have some code that is expected to be re-used (e.g., a function meant to be executed more than once in the application), declaring the function and then invoking it might be a better option.
 
