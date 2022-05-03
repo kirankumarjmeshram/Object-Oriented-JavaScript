@@ -1273,7 +1273,7 @@ We could keep track of the count with a variable that we declare in the global s
 For one, this approach prevents us from polluting the global with extra variables (and potentially variable name collisions). What's more: if we use an IIFE, we can leverage a closure to protect the count variable from being accessed externally! This prevents any accidental mutations or unwanted side-effects from inadvertently altering the count.
 
 To begin, let's first create an HTML file containing a single button:
-```html
+``` js
 <!-- button.html -->
 
 <html>
@@ -1343,7 +1343,10 @@ All in all, if you simply have a one-time task (e.g., initializing an applicatio
 ### Summary
 An immediately-invoked function expression (IIFE) is a function that is called immediately after it is defined. Utilizing an IIFE alongside closures allows for a private scope, which maintains privacy for variables defined within them. And since less variables are created, an IIFE will help to minimize pollution of the global environment, hindering the chances of variable name collisions.
 
-
+## Lesson 3:
+## 1. Classess and Objecjects
+### Object-Oriented Programming
+Objects can have properties to represent attributes or characteristics, as well as methods to represent actions that can be performed. Using the analogy of spoken language, you can think of objects as nouns, such as a "dog" or a "car." Values of properties are adjectives, such as "blue." Methods, then, are the verbs, such as "bark" or "drive."
 
 
 
