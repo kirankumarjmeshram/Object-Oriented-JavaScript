@@ -1344,10 +1344,43 @@ All in all, if you simply have a one-time task (e.g., initializing an applicatio
 An immediately-invoked function expression (IIFE) is a function that is called immediately after it is defined. Utilizing an IIFE alongside closures allows for a private scope, which maintains privacy for variables defined within them. And since less variables are created, an IIFE will help to minimize pollution of the global environment, hindering the chances of variable name collisions.
 
 ## Lesson 3:
-## 1. Classess and Objecjects
+## 1. Classess and Objects
 ### Object-Oriented Programming
 Objects can have properties to represent attributes or characteristics, as well as methods to represent actions that can be performed. Using the analogy of spoken language, you can think of objects as nouns, such as a "dog" or a "car." Values of properties are adjectives, such as "blue." Methods, then, are the verbs, such as "bark" or "drive."
 
+### 2. Constructor Functions
+
+To instantiate (i.e., create) a new object, we use the new operator to invoke the function:
+```js
+new SoftwareDeveloper();
+```
+Keep in mind that even though the function's name starts with a capital, that doesn't automatically make this a constructor function (i.e., though developers name constructor functions in CamelCase by convention, it is not enforced by the language). What does make SoftwareDeveloper() a constructor function are:
+
+- The use of the new operator to invoke the function
+- How the function is coded internally (which we'll look at right now!)
+
+### Constructor Functions: Structure and Syntax
+This is what the internals of a constructor function looks like:
+```js
+function SoftwareDeveloper() {
+  this.favoriteLanguage = 'JavaScript';
+}
+```
+### Creating a New Object
+As we've seen above, let's use the new operator to create a new object:
+```js
+let developer = new SoftwareDeveloper();
+```
+We've saved the return value of this invocation to the variable developer. Let's execute console.log(developer); to log this SoftwareDeveloper object to the console:
+![](https://video.udacity-data.com/topher/2017/December/5a31c70b_l3-10-object-from-constructor-function/l3-10-object-from-constructor-function.png);
+
+The SoftwareDeveloper object is logged to the console.
+
+### Creating Multiple Objects
+Let's use the new operator to create a new object:
+```js
+let developer = new SoftwareDeveloper();
+```
 
 
 
