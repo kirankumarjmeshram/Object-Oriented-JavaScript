@@ -1,4 +1,33 @@
+SOLID Principle
+
 Part 1: Single Responsibility Principle (SRP)
     Principle:
     The Single Responsibility Principle states that a class should have only one reason to change. 
     This means that a class should have only one job or responsibility.
+
+Part 2: Open/Closed Principle (OCP)
+    It states that software entities (such as classes, modules, and functions) should be open for extension but closed for modification. 
+    In simpler terms, this means that you should be able to add new functionality to a class or module without changing its existing code.
+
+Part 3: Liskov Substitution Principle (LSP)
+    It states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. 
+    In other words, a subclass should be able to take the place of its superclass without any issues.
+
+Part 4: Interface Segregation Principle (ISP)
+    It states that no client should be forced to depend on methods it does not use. 
+    This means that interfaces should be small and specific, so that they only contain the methods that a client needs.
+
+Part 5: Dependency Inversion Principle (DIP)
+    It states that high-level modules should not depend on low-level modules. Both should depend on abstractions. 
+    Abstractions should not depend on details. Details should depend on abstractions.
+
+DRY Principle  
+    The DRY principle stands for "Don't Repeat Yourself." 
+    It is a software development principle that aims to reduce repetition of information by using abstraction, encapsulation, and other techniques. 
+    The goal is to make the code more maintainable, readable, and efficient.
+
+YAGNI Principle
+    The YAGNI principle stands for "You Aren't Gonna Need It." 
+    It is a software development principle that encourages developers to only implement features that are necessary for the current version of the software. 
+    This can help to keep the codebase clean and focused on the essential functionality.
+
