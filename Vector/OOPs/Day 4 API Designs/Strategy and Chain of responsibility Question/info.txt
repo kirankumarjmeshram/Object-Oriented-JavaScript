@@ -1,0 +1,50 @@
+Assignment Questions: RESTful API Design and Best Practices
+
+1. **Design and Implement a RESTful API for a Library Management System**
+    - **Task**: Design a RESTful API for managing a library's collection of books and members. The API should include endpoints for the following operations:
+        - List all books.
+        - Retrieve details of a specific book by its ID.
+        - Add a new book.
+        - Update details of an existing book.
+        - Delete a book.
+        - List all members.
+        - Retrieve details of a specific member by their ID.
+        - Add a new member.
+        - Update details of an existing member.
+        - Delete a member.
+    - **Requirements**:
+        - Use appropriate HTTP methods (GET, POST, PUT, DELETE).
+        - Design URIs following RESTful principles.
+        - Use path parameters for resource identification.
+        - Include necessary request and response models.
+        - Implement error handling with appropriate HTTP status codes and error messages.
+
+2. **API Versioning**
+    - **Task**: Implement versioning in the Library Management System API you designed in Question 1. Choose one of the versioning strategies (URL versioning, query parameter versioning, or header versioning) and apply it to the API.
+    - **Requirements**:
+        - Ensure that the API supports at least two versions (e.g., v1 and v2).
+        - Make a breaking change between the versions (e.g., changing the structure of the response).
+        - Document the differences between the versions.
+3. **Document the API [Learn SWAGGER on you own]**
+    - **Task**: Document the Library Management System API, ensuring that developers can understand and use the API efficiently.
+    - **Requirements**:
+        - Include detailed descriptions for each endpoint.
+        - Provide examples of requests and responses.
+        - Document request and response formats, including any required and optional parameters.
+        - Include information on error responses and status codes.
+        - Create a clear and comprehensive guide that can be shared with developers.
+4. **Implement and Handle Errors Gracefully**
+    - **Task**: Enhance the Library Management System API to include comprehensive error handling. Ensure that the API returns meaningful error messages and appropriate HTTP status codes.
+    - **Requirements**:
+        - Implement validation checks for request data (e.g., required fields, data types).
+        - Return 400 Bad Request for invalid input.
+        - Return 404 Not Found for non-existent resources.
+        - Return 500 Internal Server Error for unexpected server errors.
+        - Include detailed error messages and error codes in the response.
+5. **Add Query Parameters for Filtering and Sorting**
+    - **Task**: Extend the Library Management System API to support filtering and sorting of the book list.
+    - **Requirements**:
+        - Add query parameters for filtering books by author, genre, and publication year.
+        - Add a query parameter for sorting books by title and publication date (ascending and descending).
+        - Implement the logic to handle these query parameters in the API.
+        - Test the filtering and sorting functionality using Postman.

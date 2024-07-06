@@ -1,0 +1,17 @@
+### Strategy and Chain of responsibility Question:
+
+You are tasked with creating an order processing system for an e-commerce platform. The system should calculate shipping costs using different strategies and handle order processing through different levels of staff. 
+
+**Requirements:**
+
+1. Implement a shipping strategy interface and three concrete strategies:
+    - Standard shipping.
+    - Express shipping.
+    - Free shipping.
+2. Implement an abstract class for order handlers with methods to set the next handler in the chain and handle the order.
+3. Implement three concrete order handlers:
+    - Junior Staff for simple orders.
+    - Senior Staff for complex orders.
+    - Manager for the most complex orders.
+4. Create an `Order` class that sets the shipping strategy and sets up a chain of order handlers, then submits orders for processing.
+5. Demonstrate the use of these strategies and handlers in a main class.
