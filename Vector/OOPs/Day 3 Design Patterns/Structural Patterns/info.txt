@@ -1,0 +1,14 @@
+### Structural Patterns
+
+1. **Adapter Pattern**
+    - **Question 7:** Implement an Adapter Pattern to integrate a new e-commerce platform with an existing inventory management system. Create an adapter that allows the new platform to access inventory data from the legacy system.
+        - **Example:** Implement the `LegacyInventorySystem` class, the new `Inventory` interface, and the `InventoryAdapter` class. Demonstrate how the new e-commerce platform uses the adapter to check stock levels.
+    - **Question 8:** Extend the Adapter Pattern to support multiple legacy inventory systems. Modify the adapter to handle different inventory systems and demonstrate its usage.
+2. **Facade Pattern**
+    - **Question 9:** Create a Facade Pattern for a smart home automation system that includes lights, thermostats, and security cameras. The facade should provide a simple interface to control these devices.
+        - **Example:** Implement the `SmartHomeFacade` class with methods to turn on/off lights, set the thermostat, and monitor security cameras. Demonstrate its usage in a scenario where a user controls all devices through the facade.
+    - **Question 10:** Extend the Facade Pattern to include additional smart home devices (e.g., smart locks, speakers). Modify the facade to control these new devices and demonstrate their usage.
+3. **Decorator Pattern**
+    - **Question 11:** Implement a Decorator Pattern to enhance a base coffee beverage with additional ingredients (e.g., Milk, Sugar, Vanilla). Create decorators for each ingredient and demonstrate their usage.
+        - **Example:** Implement the `Coffee` interface and `BasicCoffee` class, along with `MilkDecorator`, `SugarDecorator`, and `VanillaDecorator` classes. Demonstrate creating a coffee with different combinations of ingredients.
+    - **Question 12:** Extend the Decorator Pattern to support seasonal flavors (e.g., Pumpkin Spice, Peppermint). Modify the decorators to include these new flavors and demonstrate their usage.

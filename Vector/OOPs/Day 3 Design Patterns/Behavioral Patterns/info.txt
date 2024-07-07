@@ -1,0 +1,12 @@
+
+### Behavioral Patterns
+
+1. **Observer Pattern**
+    - **Question 13:** Implement an Observer Pattern for a stock market application where users can subscribe to updates on specific stocks. The application should notify subscribers when the stock prices change.
+        - **Example:** Implement the `Stock` class, `Observer` interface, and `StockObserver` class. Demonstrate subscribing to stock updates and receiving notifications when prices change.
+    - **Question 14:** Extend the Observer Pattern to allow users to unsubscribe from stock updates. Demonstrate the ability to subscribe, receive updates, and unsubscribe.
+2. **Command Pattern**
+    - **Question 15:** Implement a Command Pattern for a smart home voice assistant that can execute commands such as turning on/off lights, setting the thermostat, and locking doors. Create command classes for each action.
+        - **Example:** Implement the `LightOnCommand`, `LightOffCommand`, `ThermostatSetCommand`, and `LockDoorCommand` classes. Demonstrate using the voice assistant to execute these commands.
+    - **Question 16:** Extend the Command Pattern to include a macro command that can execute a sequence of commands (e.g., "Good Night" command that turns off lights, sets the thermostat, and locks doors). Demonstrate creating and executing a macro command.
+    

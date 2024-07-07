@@ -1,0 +1,72 @@
+
+
+## Practical Questions:
+
+### Question 1: E-Commerce Order Processing System
+
+Develop an order processing system for an e-commerce platform. The system should:
+
+- Allow users to create orders with various items using a flexible and extensible object creation mechanism.
+- Ensure that only one instance of the inventory manager exists to handle stock levels across the application.
+- Integrate with different payment gateways (e.g., PayPal, Stripe) using a consistent interface.
+- Notify users of order status updates (e.g., Order Placed, Shipped, Delivered).
+
+**Requirements:**
+
+1. Implement a pattern to create different types of order items (e.g., electronics, clothing, groceries).
+2. Use a pattern to ensure that the inventory manager is a singleton.
+3. Implement an adapter pattern to integrate with multiple payment gateways.
+4. Use an observer pattern to notify users of order status updates.
+
+**Demonstrate:**
+
+- Creating and processing an order with different items.
+- Integrating and switching between different payment gateways.
+- Managing stock levels with a singleton inventory manager.
+- Notifying users of order status changes.
+
+### Question 2: Smart Home Automation System
+
+Create a smart home automation system that:
+
+- Allows users to configure and manage various smart devices (e.g., lights, thermostats, security cameras) through a unified interface.
+- Ensures that only one instance of the configuration manager exists to manage device settings.
+- Integrates with both legacy and new smart home devices using a consistent interface.
+- Provides an option for users to create and execute macro commands (e.g., "Good Morning" routine) that control multiple devices at once.
+
+**Requirements:**
+
+1. Implement a pattern to manage the configuration and control of different smart devices.
+2. Use a pattern to ensure that the configuration manager is a singleton.
+3. Implement an adapter pattern to integrate legacy and new smart home devices.
+4. Use a command pattern to create and execute macro commands.
+
+**Demonstrate:**
+
+- Configuring and controlling various smart devices.
+- Managing device settings with a singleton configuration manager.
+- Integrating and controlling both legacy and new smart home devices.
+- Creating and executing macro commands for multiple device operations.
+
+### Question 3: Restaurant Management System
+
+Develop a restaurant management system that:
+
+- Allows the creation of different types of meals (e.g., appetizers, main courses, desserts) with customizable ingredients.
+- Ensures that only one instance of the menu manager exists to handle the restaurant's menu.
+- Integrates with different third-party delivery services using a consistent interface.
+- Notifies kitchen staff and customers of order updates (e.g., Order Received, Cooking, Ready for Pickup).
+
+**Requirements:**
+
+1. Implement a pattern to create different types of meals with customizable ingredients.
+2. Use a pattern to ensure that the menu manager is a singleton.
+3. Implement an adapter pattern to integrate with multiple third-party delivery services.
+4. Use an observer pattern to notify kitchen staff and customers of order updates.
+
+**Demonstrate:**
+
+- Creating different types of meals with various ingredients.
+- Managing the restaurant's menu with a singleton menu manager.
+- Integrating and switching between different delivery services.
+- Notifying kitchen staff and customers of order updates.

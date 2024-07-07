@@ -1,0 +1,14 @@
+### Creational Patterns
+
+1. **Factory Pattern**
+    - **Question 1:** Implement a Factory Pattern for a meal delivery service. The service should create different types of meals (e.g., VeganMeal, NonVeganMeal, GlutenFreeMeal) based on user preferences.
+        - **Example:** Create a `MealFactory` class that produces instances of different meal types based on a string input. Demonstrate creating various meals based on user dietary restrictions.
+    - **Question 2:** Extend the Factory Pattern to include a new type of meal (e.g., KetoMeal). Modify the `MealFactory` to accommodate this new meal type and demonstrate its usage.
+2. **Singleton Pattern**
+    - **Question 3:** Create a Singleton class for a printer spooler that manages print jobs in an office environment. Ensure that only one instance of the spooler exists and handles all print jobs.
+        - **Example:** Implement the `PrinterSpooler` class with methods to add, process, and view print jobs. Demonstrate its usage in a multi-threaded scenario where multiple print jobs are submitted concurrently.
+    - **Question 4:** Implement a Singleton class for a global settings manager in a web application. This manager should handle settings like theme, language, and user preferences. Demonstrate its usage by changing and retrieving settings from different parts of the application.
+3. **Builder Pattern**
+    - **Question 5:** Design and implement a Builder Pattern for a travel itinerary planner. The planner should allow users to build itineraries with various activities (e.g., flights, hotel stays, tours).
+        - **Example:** Implement the `Itinerary` and `ItineraryBuilder` classes. Demonstrate building different travel itineraries with various activities.
+    - **Question 6:** Extend the Builder Pattern to include optional travel insurance and car rental services. Modify the `ItineraryBuilder` to handle these optional components and demonstrate their usage.
